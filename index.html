@@ -16,6 +16,11 @@
 
 <body>
 
+  <!-- ===== FLOATING SETTINGS BUTTON ===== -->
+  <button class="settings-floating-btn" onclick="openSettingsModal()" title="Offline Video Settings">
+    ⚙️ <span>Offline Videos</span>
+  </button>
+
   <!-- ===== HERO SECTION ===== -->
   <header class="hero">
     <div class="hero-overlay"></div>
@@ -41,14 +46,13 @@
       <h2 class="section-title">My <span class="accent">Exercises</span></h2>
       <p class="section-subtitle">Click on the exercise name to watch the video · Click on the image to zoom in</p>
     </div>
-
     <!-- ===== FILTER TABS ===== -->
     <div class="filter-tabs" id="filterTabs">
       <button class="filter-tab active" onclick="filterExercises('Chest + TriCep الجمعة', this)">🌸 Chest + TriCep
-        الجمعة</button>
-      <button class="filter-tab" onclick="filterExercises('Back + BiCep السبت', this)">🌸 Back + BiCep السبت</button>
-      <button class="filter-tab" onclick="filterExercises('Arm الإثنين', this)">🌸 Arm الإثنين</button>
-      <button class="filter-tab" onclick="filterExercises('Leg + Abs الاربعاء', this)">🌸 Leg + Abs الاربعاء</button>
+       </button>
+      <button class="filter-tab" onclick="filterExercises('Back + BiCep السبت', this)">🌸 Back + BiCep</button>
+      <button class="filter-tab" onclick="filterExercises('Arm الإثنين', this)">🌸 Arm </button>
+      <button class="filter-tab" onclick="filterExercises('Leg + Abs الاربعاء', this)">🌸 Leg + Abs </button>
     </div>
 
     <!-- ===== EXERCISES GRID ===== -->
@@ -76,16 +80,25 @@
     </div>
   </div>
 
-  <!-- ===== VIDEO CONFIRM MODAL ===== -->
+  <!-- ===== VIDEO PLAYER MODAL ===== -->
   <div class="modal-overlay" id="videoModal" onclick="closeVideoModal()">
     <div class="modal-content video-modal-content" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeVideoModal()">✕</button>
-      <div class="video-modal-icon">🎬</div>
-      <h3 id="videoModalTitle">Opening Video</h3>
-      <p id="videoModalSubtitle">You're about to watch the tutorial for this exercise.</p>
-      <div class="video-modal-actions">
-        <button class="btn-cancel" onclick="closeVideoModal()">Cancel</button>
-        <button class="btn-watch" id="watchBtn" onclick="openVideoLink()">Watch Now ▶</button>
+      <h3 id="videoModalTitle">Exercise Video</h3>
+      <div class="video-wrapper">
+        <video id="modalVideoPlayer" controls playsinline preload="auto"></video>
+        <iframe id="modalYoutubePlayer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        
+        <!-- Loading & Status States -->
+        <div id="videoLoadingState" class="video-loader-container">
+          <div class="video-spinner"></div>
+          <p>Loading video...</p>
+        </div>
+        <div id="videoOfflineError" class="video-error-container" style="display: none;">
+          <div class="error-icon">⚠️</div>
+          <p>This video is not cached, and you are offline.</p>
+          <p class="error-sub">Please connect to the internet or cache all videos beforehand.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -104,6 +117,41 @@
       <div class="f-shape f-shape-2"></div>
     </div>
   </footer>
+
+  <!-- ===== SETTINGS / CACHING MODAL ===== -->
+  <div class="modal-overlay" id="settingsModal" onclick="closeSettingsModal()">
+    <div class="modal-content settings-modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeSettingsModal()">✕</button>
+      
+      <div class="settings-modal-header">
+        <span class="settings-modal-icon">⚙️</span>
+        <h3>Offline Video Settings</h3>
+        <p>Ensure smooth playback when you have no internet connection.</p>
+      </div>
+
+      <div class="settings-modal-body">
+        <div class="cache-status-box">
+          <div class="status-indicator">
+            <span id="settingsCacheProgressText">Checking cached status...</span>
+          </div>
+          <button id="settingsCacheAllBtn" class="cache-btn" onclick="cacheAllVideos()">
+            📥 Cache All Videos
+          </button>
+        </div>
+
+        <div class="cache-progress-bar" id="settingsCacheProgressBar" style="display: none;">
+          <div class="cache-progress-fill" id="settingsCacheProgressFill" style="width: 0%"></div>
+        </div>
+
+        <div class="cached-videos-section">
+          <h4>Video Download List</h4>
+          <div class="cached-videos-list" id="cachedVideosList">
+            <!-- Dynamically populated video list with cache status icons -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>
