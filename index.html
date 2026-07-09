@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Her Fit Journey 🌸 Workout Planner</title>
+  <meta name="description" content="A beautiful feminine workout planner to track your exercises, videos, and notes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ===== HERO SECTION ===== -->
+  <header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">✨ Your Personal</div>
+      <h1 class="hero-title">Workout <span class="accent">Journal</span></h1>
+      <p class="hero-subtitle">Track your exercises, watch your videos &amp; stay motivated every single day 💪🌸</p>
+      <a href="#workouts" class="hero-btn">Start Training <span>→</span></a>
+    </div>
+    <div class="hero-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-dot"></div>
+    </div>
+  </header>
+
+  <!-- ===== MAIN WORKOUT SECTION ===== -->
+  <main class="main-content" id="workouts">
+    <div class="section-header">
+      <h2 class="section-title">My <span class="accent">Exercises</span></h2>
+      <p class="section-subtitle">Click on the exercise name to watch the video · Click on the image to zoom in</p>
+    </div>
+
+    <!-- ===== FILTER TABS ===== -->
+    <div class="filter-tabs" id="filterTabs">
+      <button class="filter-tab active" onclick="filterExercises('Chest + TriCep الجمعة', this)">🌸 Chest + TriCep
+        الجمعة</button>
+      <button class="filter-tab" onclick="filterExercises('Back + BiCep السبت', this)">🌸 Back + BiCep السبت</button>
+      <button class="filter-tab" onclick="filterExercises('Arm الإثنين', this)">🌸 Arm الإثنين</button>
+      <button class="filter-tab" onclick="filterExercises('Leg + Abs الاربعاء', this)">🌸 Leg + Abs الاربعاء</button>
+    </div>
+
+    <!-- ===== EXERCISES GRID ===== -->
+    <div class="exercises-grid" id="exercisesGrid"></div>
+
+    <div class="empty-state" id="emptyState">
+      <div class="empty-icon">🌸</div>
+      <p>No exercises yet!</p>
+    </div>
+  </main>
+
+  <!-- ===== IMAGE ZOOM MODAL ===== -->
+  <div class="modal-overlay" id="imageModal" onclick="closeImageModal()">
+    <div class="modal-content image-modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeImageModal()">✕</button>
+      <div class="modal-img-container" id="modalImgContainer">
+        <img src="" alt="" id="modalImage" class="modal-img" />
+      </div>
+      <div class="zoom-controls">
+        <button class="zoom-btn" onclick="zoomImage(0.8)" title="Zoom Out">➖</button>
+        <button class="zoom-btn" onclick="resetImageZoom()" title="Reset Zoom">🔄</button>
+        <button class="zoom-btn" onclick="zoomImage(1.2)" title="Zoom In">➕</button>
+      </div>
+      <p class="modal-caption" id="modalCaption"></p>
+    </div>
+  </div>
+
+  <!-- ===== VIDEO CONFIRM MODAL ===== -->
+  <div class="modal-overlay" id="videoModal" onclick="closeVideoModal()">
+    <div class="modal-content video-modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeVideoModal()">✕</button>
+      <div class="video-modal-icon">🎬</div>
+      <h3 id="videoModalTitle">Opening Video</h3>
+      <p id="videoModalSubtitle">You're about to watch the tutorial for this exercise.</p>
+      <div class="video-modal-actions">
+        <button class="btn-cancel" onclick="closeVideoModal()">Cancel</button>
+        <button class="btn-watch" id="watchBtn" onclick="openVideoLink()">Watch Now ▶</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TOAST NOTIFICATION ===== -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p class="footer-text">💗 Made with love for your fitness journey</p>
+      <p class="footer-sub">Stay consistent · Stay beautiful · Stay strong 🌸</p>
+    </div>
+    <div class="footer-shapes">
+      <div class="f-shape f-shape-1"></div>
+      <div class="f-shape f-shape-2"></div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
